@@ -15,6 +15,10 @@ class Registry():
             self.name = name
         self.store = {}
 
+
+    def __repr__(self):
+        return f'{self.store}'
+
     def __len__(self):
         return len(self.store)
 

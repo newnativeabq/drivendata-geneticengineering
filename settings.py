@@ -10,6 +10,9 @@ import os
 
 class Config():
     def __init__(self, train=True):
+
+        self.debug_print()
+
         self.train = train
 
         self.DEBUG = config('DEBUG', default=True, cast=bool)
@@ -34,8 +37,6 @@ class Config():
 
         # Dataset Setup
         self.DATASET_PATH = self._build_path(config('DATASET_PATH'))
-        self.IMAGE_PATH = self._build_path(config('IMAGE_PATH'))
-        # self.MASK_PATH = self._build_path(config('MASK_PATH'))
 
 
 
@@ -60,6 +61,9 @@ class Config():
         if is_dir_or_file(path):
             return path
 
+
+    def debug_print(self):
+        print(f'Models Available: {ModelRegistry}')
 
 
 
