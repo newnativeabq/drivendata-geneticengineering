@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 defaults = {
     'random_state': 0,
-    'n_jobs': 6,
+    'n_jobs': 10,
 }
 
 
