@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     files = {
         'training_data': [
-            LoadSpec(make_path(data_dir, 'train_values.csv'), index_col='sequence_id'),
+            LoadSpec(make_path(data_dir, 'train_values_mod.csv'), index_col='sequence_id'),
             ],
         'training_labels': [
             LoadSpec(make_path(data_dir, 'train_labels.csv'), index_col='sequence_id'),
@@ -57,6 +57,8 @@ if __name__ == "__main__":
             LoadSpec(make_path(data_dir, 'test_values.csv'), index_col='sequence_id'),
             ],
     }
+
+    print('Files Specified: \n', files)
 
     X_train, X_test, y_train, y_test = prepare_data(load(files=files), label_type='ordinal')
 
