@@ -2,6 +2,7 @@
 
 
 from sklearn.model_selection import train_test_split
+import pandas as pd
 import numpy as np
 
 from utils.load_data import load, LoadSpec, make_path
@@ -21,7 +22,7 @@ def _create_ordinal_labels(tlab):
     label_ar = tlab.to_numpy()
     nlabels = np.dot(label_ar, vect).astype(int)
 
-    return nlabels
+    return pd.DataFrame(nlabels), lookup
 
 
 def prepare_data(files, label_type='default'):
@@ -30,7 +31,7 @@ def prepare_data(files, label_type='default'):
     test_data = files['test_data'][0]
 
     if label_type == 'ordinal':
-        training_labels = _create_ordinal_labels(training_labels)
+        training_labels, lookup = _create_ordinal_labels(training_labels)
     
     X_train, X_test, y_train, y_test = train_test_split(
                                         training_data.iloc[:, 1:], training_labels, 
@@ -61,6 +62,7 @@ if __name__ == "__main__":
     print('Files Specified: \n', files)
 
     X_train, X_test, y_train, y_test = prepare_data(load(files=files), label_type='ordinal')
+    # X_train, X_test, y_train, y_test = prepare_data(load(files=files), label_type='default')
 
     clf.fit(X_train, y_train)
     print('Score: ', clf.score(X_test, y_test))
